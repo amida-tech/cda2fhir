@@ -3,7 +3,6 @@ package tr.com.srdc.cda2fhir.testutil.generator;
 import java.math.BigDecimal;
 
 import org.hl7.fhir.r4.model.Quantity;
-import org.hl7.fhir.r4.model.SimpleQuantity;
 import org.junit.Assert;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 

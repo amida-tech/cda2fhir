@@ -30,7 +30,6 @@ import org.hl7.fhir.r4.model.Bundle.BundleType;
 import org.hl7.fhir.r4.model.Identifier;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.consol.ConsolPackage;
 import org.openhealthtools.mdht.uml.cda.consol.ContinuityOfCareDocument;
@@ -149,39 +148,6 @@ public class ValidatorTest {
 		String cdaResourcePath = "src/test/resources/Vitera_CCDA_SMART_Sample.xml";
 		String targetPathForFHIRResource = "src/test/resources/output/Vitera_CCDA_SMART_Sample-w-profile-validation.xml";
 		String targetPathForResultFile = "src/test/resources/output/validation-result-w-profile-for-Vitera_CCDA_SMART_Sample.html";
-		boolean generateDAFProfileMetadata = true;
-		transformAndValidate(cdaResourcePath, targetPathForFHIRResource, targetPathForResultFile,
-				generateDAFProfileMetadata, false);
-	}
-
-	// HannahBanana_EpicCCD.xml
-	@Ignore
-	public void testHannahBanana() throws Exception {
-		String cdaResourcePath = "src/test/resources/Epic/HannahBanana_EpicCCD-pretty.xml";
-		String targetPathForFHIRResource = "src/test/resources/output/Epic/HannahBanana_EpicCCD-pretty.fhir.xml";
-		String targetPathForResultFile = "src/test/resources/output/Epic/HannahBanana_EpicCCD-pretty.validation-result.html";
-		boolean generateDAFProfileMetadata = true;
-		transformAndValidate(cdaResourcePath, targetPathForFHIRResource, targetPathForResultFile,
-				generateDAFProfileMetadata, false);
-	}
-
-	// robust CCD.XML
-	@Ignore
-	public void testRobust() throws Exception {
-		String cdaResourcePath = "src/test/resources/Epic/robust CCD.XML";
-		String targetPathForFHIRResource = "src/test/resources/output/Epic/robust CCD.fhir.xml";
-		String targetPathForResultFile = "src/test/resources/output/Epic/robust CCD.validation-result.html";
-		boolean generateDAFProfileMetadata = true;
-		transformAndValidate(cdaResourcePath, targetPathForFHIRResource, targetPathForResultFile,
-				generateDAFProfileMetadata, false);
-	}
-
-	// Person-RAKIA_TEST_DOC0001 (1).xml
-	@Ignore
-	public void testRakia() throws Exception {
-		String cdaResourcePath = "src/test/resources/Cerner/Person-RAKIA_TEST_DOC00001 (1).xml";
-		String targetPathForFHIRResource = "src/test/resources/output/Cerner/Person-RAKIA_TEST_DOC00001 (1).fhir.xml";
-		String targetPathForResultFile = "src/test/resources/output/Cerner/Person-RAKIA_TEST_DOC00001 (1).validation-result.html";
 		boolean generateDAFProfileMetadata = true;
 		transformAndValidate(cdaResourcePath, targetPathForFHIRResource, targetPathForResultFile,
 				generateDAFProfileMetadata, false);

@@ -57,19 +57,19 @@ public class ConditionTest {
 		String categoryCode = encounterCondition.getCategoryFirstRep().getCodingFirstRep().getCode();
 		String categorySystem = encounterCondition.getCategoryFirstRep().getCodingFirstRep().getSystem();
 
-		Assert.assertEquals("category system is http://hl7.org/fhir/condition-category", categorySystem,
-				"http://hl7.org/fhir/condition-category");
-		Assert.assertEquals("category code is encounter-diagnosis", categoryCode, "encounter-diagnosis");
-		Assert.assertEquals("category displauy is Encounter Diagnosis", categoryDisplay, "Encounter Diagnosis");
+		Assert.assertEquals("category system is http://hl7.org/fhir/condition-category",
+				"http://hl7.org/fhir/condition-category", categorySystem);
+		Assert.assertEquals("category code is encounter-diagnosis", "encounter-diagnosis", categoryCode);
+		Assert.assertEquals("category displauy is Encounter Diagnosis", "Encounter Diagnosis", categoryDisplay);
 
 		categoryDisplay = problemListItemCondition.getCategoryFirstRep().getCodingFirstRep().getDisplay();
 		categoryCode = problemListItemCondition.getCategoryFirstRep().getCodingFirstRep().getCode();
 		categorySystem = problemListItemCondition.getCategoryFirstRep().getCodingFirstRep().getSystem();
 
-		Assert.assertEquals("category system is http://hl7.org/fhir/condition-category", categorySystem,
-				"http://hl7.org/fhir/condition-category");
-		Assert.assertEquals("category code is problem-list-item", categoryCode, "problem-list-item");
-		Assert.assertEquals("category displauy is Problem List Item", categoryDisplay, "Problem List Item");
+		Assert.assertEquals("category system is http://hl7.org/fhir/condition-category",
+				"http://hl7.org/fhir/condition-category", categorySystem);
+		Assert.assertEquals("category code is problem-list-item", "problem-list-item", categoryCode);
+		Assert.assertEquals("category displauy is Problem List Item", "Problem List Item", categoryDisplay);
 
 	}
 
@@ -96,8 +96,8 @@ public class ConditionTest {
 		CodeableConcept categoryEncounter = problemListItemCondition.getCategoryFirstRep();
 		CodeableConcept categoryProblemListItem = problemListItemCondition.getCategory().get(1);
 
-		Assert.assertEquals(categoryEncounter.getCodingFirstRep().getCode(), "encounter-diagnosis");
-		Assert.assertEquals(categoryProblemListItem.getCodingFirstRep().getCode(), "problem-list-item");
+		Assert.assertEquals("encounter-diagnosis", categoryEncounter.getCodingFirstRep().getCode());
+		Assert.assertEquals("problem-list-item", categoryProblemListItem.getCodingFirstRep().getCode());
 
 	}
 

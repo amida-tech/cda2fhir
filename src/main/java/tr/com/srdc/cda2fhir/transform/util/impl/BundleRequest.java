@@ -19,7 +19,7 @@ import tr.com.srdc.cda2fhir.conf.Config;
 
 public class BundleRequest {
 
-	private final static Logger logger = LoggerFactory.getLogger(BundleRequest.class);
+	private static final Logger logger = LoggerFactory.getLogger(BundleRequest.class);
 
 	/**
 	 * Reads the configuration file, and parses out any overriding OIDs.
@@ -56,8 +56,8 @@ public class BundleRequest {
 		// find any overriding OIDs.
 		String[] subsetOIDArray = getDefinedOIDs(bundleEntry.getResource().getResourceType().name());
 
-		if (bundleEntry.getResource().getResourceType().name() != "Medication"
-				&& bundleEntry.getResource().getResourceType().name() != "PractitionerRole") {
+		if (bundleEntry.getResource().getResourceType().name().equals("Medication") == false
+				&& bundleEntry.getResource().getResourceType().name().equals("PractitionerRole") == false) {
 			if (identifierObject != null) {
 				List<Base> identifiers = identifierObject.getValues();
 				if (identifiers != null) {
@@ -70,7 +70,7 @@ public class BundleRequest {
 								// override OID selection(s).
 								for (String OID : subsetOIDArray) {
 									if (currentId.getSystem().equals(OID)) {
-										if (ifNotExistString != "") {
+										if (ifNotExistString.equals("") == false) {
 											ifNotExistString = ifNotExistString + ",";
 										} else {
 											ifNotExistString = "identifier=";
@@ -80,7 +80,7 @@ public class BundleRequest {
 									}
 								}
 							} else {
-								if (ifNotExistString != "") {
+								if (ifNotExistString.equals("") == false) {
 									ifNotExistString = ifNotExistString + ",";
 								} else {
 									ifNotExistString = "identifier=";
@@ -99,9 +99,9 @@ public class BundleRequest {
 		}
 
 		// if we can't pull an identifier, try other logic.
-		if (ifNotExistString == "") {
+		if (ifNotExistString.equals("")) {
 			// if it's a medication, check by aggregate encodings.
-			if (bundleEntry.getResource().getResourceType().name() == "Medication") {
+			if (bundleEntry.getResource().getResourceType().name().equals("Medication")) {
 				Property medicationCode = bundleEntry.getResource().getChildByName("code");
 				if (medicationCode != null) {
 					List<Base> conceptList = medicationCode.getValues();
@@ -112,9 +112,9 @@ public class BundleRequest {
 
 							if (Config.MEDICATION_CODE_SYSTEM != null) {
 								if (coding.getCode() != null) {
-									if (coding.getSystem() == Config.MEDICATION_CODE_SYSTEM) {
+									if (coding.getSystem().equals(Config.MEDICATION_CODE_SYSTEM)) {
 										// add or for multiple parameters
-										if (ifNotExistString != "") {
+										if (ifNotExistString.equals("") == false) {
 											ifNotExistString = ifNotExistString + "&";
 										} else {
 											ifNotExistString = "code=";
@@ -126,7 +126,7 @@ public class BundleRequest {
 							} else {
 								if (coding.getCode() != null) {
 									// add or for multiple parameters
-									if (ifNotExistString != "") {
+									if (ifNotExistString.equals("") == false) {
 										ifNotExistString = ifNotExistString + "&";
 									} else {
 										ifNotExistString = "code=";
@@ -159,11 +159,11 @@ public class BundleRequest {
 			
 
 			// if it's a practitioner role, de-duplicate by reference ids.
-			if (bundleEntry.getResource().getResourceType().name() == "PractitionerRole") {
+			if (bundleEntry.getResource().getResourceType().name().equals("PractitionerRole")) {
 				PractitionerRole practitionerRole = (PractitionerRole) bundleEntry.getResource();
 				Identifier practitionerIdentifier = practitionerRole.getPractitionerTarget().getIdentifierFirstRep();
 				Identifier organizationIdentifier = practitionerRole.getOrganizationTarget().getIdentifierFirstRep();
-				if (organizationIdentifier != null & practitionerIdentifier != null) {
+				if (organizationIdentifier != null && practitionerIdentifier != null) {
 					ifNotExistString = "practitioner.identifier=" + practitionerIdentifier.getSystem() + "|"
 							+ practitionerIdentifier.getValue();
 					ifNotExistString = ifNotExistString + "&" + "organization.identifier="
