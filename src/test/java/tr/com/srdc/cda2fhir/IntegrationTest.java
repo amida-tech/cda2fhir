@@ -33,6 +33,7 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,7 @@ import tr.com.srdc.cda2fhir.util.FHIRUtil;
 import tr.com.srdc.cda2fhir.util.IdGeneratorEnum;
 import tr.com.srdc.cda2fhir.validation.ValidatorImpl;
 
+@Category(IntegrationTestMarker.class)
 public class IntegrationTest {
 	static String hapiURL = "http://localhost:1137";
 	static String serverBase = hapiURL + "/fhir";

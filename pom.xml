@@ -6,7 +6,7 @@
 
 	<groupId>tr.com.srdc</groupId>
 	<artifactId>cda2fhir</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.1.1-R4-SNAPSHOT</version>
 	<build>
 		<plugins>
 			<plugin>
@@ -22,10 +22,44 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M3</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>3.0.0-M3</version>
+					</dependency>
+				</dependencies>
 				<configuration>
 					<!-- Setting the system file encoding to UTF-8 -->
 					<argLine>-Dfile.encoding=UTF-8</argLine>
+					<excludedGroups>tr.com.srdc.cda2fhir.IntegrationTestMarker</excludedGroups>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>3.0.0-M3</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>3.0.0-M3</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<groups>tr.com.srdc.cda2fhir.IntegrationTestMarker</groups>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+						<configuration>
+							<includes>
+							<include>**/*.class</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<!-- Embeds all the dependencies in the .jar -->

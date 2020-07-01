@@ -59,7 +59,7 @@ In addition to the above mappings, cda2fhir also uses and supports the Patient, 
 
 ## Installation
 
-This project is built in Java, using version 1.8, and uses Apache Maven for dependency management. Please visit [Maven's website](http://maven.apache.org/) in order to install Maven on your system. To run the project's tests, your system will require Docker; please visit [Docker's website](https://www.docker.com/) for installation instructions.
+This project is built in Java, using version 1.8, and uses Apache Maven for dependency management. Please visit [Maven's website](http://maven.apache.org/) in order to install Maven on your system. 
 
 Under the root directory of the cda2fhir project run the following:
 
@@ -72,7 +72,16 @@ In order to make a clean install run the following:
 These will build the cda2fhir library and also run a number of test cases, which will transform some C-CDA Continuity of Care Document (CCD) instances,
 and some manually crafted CDA artifacts (e.g. entry class instances) and datatype instances to corresponding FHIR resources.
 
+To run the project's integration tests, your system will require Docker; please visit [Docker's website](https://www.docker.com/) for installation instructions.
+
+In order to run the integration tests execute the following:
+
+  $ cda2fhir> mvn integration-tests
+
+
 This project incrementally builds and releases files for use in maven projects, using the instructions provided [here](./doc/maven-instructions.md). To use, add the repository and dependency to your pom.xml like so, replacing the `X.Y.Z` with a version number.
+
+
 
 ```
 <repository>
